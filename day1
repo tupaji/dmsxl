@@ -1,0 +1,59 @@
+● 今日学习的文章链接和视频链接
+● 自己看到题目的第一想法
+● 看完代码随想录之后的想法 
+● 自己实现过程中遇到哪些困难 
+● 今日收获，记录一下自己的学习时长
+
+27 删除元素
+题目链接：https://leetcode.cn/problems/binary-search/
+文章讲解：https://programmercarl.com/0704.%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE.html
+
+初见想法是遍历移除，整个vector其他元素前移，类似暴力解法。
+双指针法自己写出来的和讲解里的不够简洁。
+
+class Solution {
+public:
+    int removeElement(vector<int>& nums, int val) {
+        int left = 0;
+        int right = 0;
+        while (right < nums.size()) {
+            if (nums[right] == val) {
+                right++;
+            } else {
+                nums[left] = nums[right];
+                left++;
+                right++;
+            }
+        }
+        return left;
+    }
+};
+
+704 二分查找
+
+题目链接：https://leetcode.cn/problems/binary-search/
+文章讲解：https://programmercarl.com/0704.%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE.html
+
+主要要注意区间的问题，避免进行重复的判断造成死循环和漏数的错误
+
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int left, right, mid;
+        left= 0;
+        right = nums.size() - 1;
+
+        while (left <= right) {
+            mid = (left + right) / 2;
+            if (nums[mid] == target) {
+                return mid;
+            } else if (nums[mid] > target) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        } 
+        return -1;
+    }
+};
+
